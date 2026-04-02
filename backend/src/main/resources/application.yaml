@@ -1,0 +1,71 @@
+# server:
+#   port: ${PORT:8080}
+#   forward-headers-strategy: native
+
+spring:
+  application:
+    name: dashboard
+  datasource:
+    url: ${POSTGRES_URL}
+    driver-class-name: org.postgresql.Driver
+    
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    # defer-datasource-initialization: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true        # Useful when starting fresh
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET}
+  expiration-ms: 86400000
+  # refresh-expiration-ms: 604800000
+
+# Application API settings
+api:
+  base-path: /api/v1
+
+
+
+
+
+# spring:
+
+#   application:
+#     name: sheet
+#   datasource:
+#     url: ${POSTGRES_URL}
+#     driver-class-name: org.postgresql.Driver
+#     hikari:
+#       max-lifetime: 600000
+#       keepalive-time: 30000
+#       connection-timeout: 20000
+#       validation-timeout: 5000
+#   jpa:
+#     hibernate:
+#       ddl-auto: update
+#     show-sql: false
+#     defer-datasource-initialization: true
+#     properties:
+#       hibernate:
+#         dialect: org.hibernate.dialect.PostgreSQLDialect
+#   sql:
+#     init:
+#       mode: never
+#       continue-on-error: true
+
+  
+  
+# jwt:
+#   secret: ${JWT_SECRET}
+#   expiration-ms: 86400000
