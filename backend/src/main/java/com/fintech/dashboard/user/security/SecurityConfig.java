@@ -49,15 +49,18 @@ public class SecurityConfig {
                         // actuator health — public
                         .requestMatchers("/actuator/health").permitAll()
 
-                        // financial records — POST and DELETE restricted to ADMIN only
-                        // this is the core role restriction for today's checkpoint
-                        .requestMatchers(HttpMethod.POST, "/records/**").hasAnyRole("ADMIN", "ANALYST")
-                        .requestMatchers(HttpMethod.PUT, "/records/**").hasAnyRole("ADMIN", "ANALYST")
-                        .requestMatchers(HttpMethod.DELETE, "/records/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/records/**").authenticated()
+                        // categories — all authenticated roles can read (dropdown data)
+                        .requestMatchers(HttpMethod.GET, "/categories/**").authenticated()
 
-                        // dashboard — all authenticated roles
-                        .requestMatchers(HttpMethod.GET, "/dashboard/**").authenticated()
+                        // financial records
+                        .requestMatchers(HttpMethod.GET, "/records/**").hasAnyRole("ANALYST", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/records/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/records/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/records/**").hasRole("ADMIN")
+
+                        // dashboard — summary open to all roles; breakdown analyst+admin
+                        .requestMatchers(HttpMethod.GET, "/dashboard/summary").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/dashboard/breakdown").hasAnyRole("ANALYST", "ADMIN")
 
                         // user management — admin only
                         .requestMatchers("/users/**").hasRole("ADMIN")
