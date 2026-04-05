@@ -6,9 +6,7 @@ spring:
   application:
     name: dashboard
   datasource:
-    url: ${SPRING_DATASOURCE_URL:${POSTGRES_URL:jdbc:postgresql://localhost:5432/postgres}}
-    username: ${SPRING_DATASOURCE_USERNAME:${POSTGRES_USER:postgres}}
-    password: ${SPRING_DATASOURCE_PASSWORD:${POSTGRES_PASSWORD:postgres}}
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/postgres}
     driver-class-name: org.postgresql.Driver
     
 
