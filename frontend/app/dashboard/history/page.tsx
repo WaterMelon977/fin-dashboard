@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { getUser } from "@/lib/auth";
 
-const API = "http://localhost:8080";
+import { API_URL as API } from "@/lib/config";
 
 interface Transaction {
   id: number;

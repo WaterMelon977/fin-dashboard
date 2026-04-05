@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getRole, isLoggedIn, authHeaders } from "@/lib/auth";
 
-const API = "http://localhost:8080";
+import { API_URL as API } from "@/lib/config";
 const ROLES = ["ADMIN", "ANALYST", "VIEWER"] as const;
 
 export default function RegisterPage() {
