@@ -16,6 +16,7 @@ import {
 import { logout, getUser } from "@/lib/auth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { API_URL as API } from "@/lib/config";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -167,7 +168,7 @@ function CreateTransactionModal({ onClose }: { onClose: () => void }) {
     const fetchCategories = async () => {
       const token = localStorage.getItem("authToken") || localStorage.getItem("accessToken");
       try {
-        const res = await fetch("http://localhost:8080/categories", {
+        const res = await fetch(`${API}/categories`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (res.ok) {
@@ -193,7 +194,7 @@ function CreateTransactionModal({ onClose }: { onClose: () => void }) {
     };
 
     try {
-      const res = await fetch("http://localhost:8080/records", {
+      const res = await fetch(`${API}/records`, {
         method: "POST",
         headers: { 
           Authorization: `Bearer ${token}`,
