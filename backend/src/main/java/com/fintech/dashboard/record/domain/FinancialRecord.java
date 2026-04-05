@@ -6,6 +6,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import org.hibernate.annotations.JdbcTypeCode;
+import java.sql.Types;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -31,7 +34,8 @@ public class FinancialRecord {
     @Column(name = "amount_paise", nullable = false)
     private Long amountPaise;
 
-    @Column(nullable = false, length = 3)
+    @Column(nullable = false, length = 3, columnDefinition = "char(3)")
+    @JdbcTypeCode(Types.CHAR)
     private String currency;
 
     @Enumerated(EnumType.STRING)

@@ -88,4 +88,15 @@ public interface FinancialRecordRepository
     List<CategoryTrendProjection> findCategoryTrend(
             @Param("categoryId") Long categoryId,
             @Param("type") RecordType type);
+
+    @Query("""
+            SELECT YEAR(r.transactionDate)  AS year,
+                   MONTH(r.transactionDate) AS month,
+                   SUM(r.amountPaise)       AS total
+            FROM FinancialRecord r
+            WHERE r.categoryId = :categoryId
+            GROUP BY YEAR(r.transactionDate), MONTH(r.transactionDate)
+            ORDER BY YEAR(r.transactionDate) ASC, MONTH(r.transactionDate) ASC
+            """)
+    List<CategoryTrendProjection> findCategoryTrend(@Param("categoryId") Long categoryId);
 }

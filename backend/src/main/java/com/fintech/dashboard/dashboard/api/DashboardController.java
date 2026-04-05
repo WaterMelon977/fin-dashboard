@@ -1,12 +1,13 @@
 package com.fintech.dashboard.dashboard.api;
 
+import com.fintech.dashboard.category.domain.CategoryType;
 import com.fintech.dashboard.common.response.ApiResponse;
+import com.fintech.dashboard.common.response.PagedResponse;
 import com.fintech.dashboard.dashboard.application.DashboardService;
 import com.fintech.dashboard.dashboard.application.dto.CategoryTrendPoint;
 import com.fintech.dashboard.dashboard.application.dto.MonthlyBreakdown;
 import com.fintech.dashboard.dashboard.application.dto.MonthlySummary;
 import com.fintech.dashboard.record.application.dto.RecordResponse;
-import com.fintech.dashboard.record.domain.RecordType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -65,23 +66,35 @@ public class DashboardController {
     @PreAuthorize("hasAnyRole('ANALYST', 'ADMIN')")
     public ResponseEntity<ApiResponse<List<CategoryTrendPoint>>> getCategoryTrend(
             @RequestParam Long categoryId,
-            @RequestParam RecordType type) {
+            @RequestParam CategoryType type) {
         return ResponseEntity.ok(
                 ApiResponse.success(dashboardService.getCategoryTrend(categoryId, type)));
     }
 
     // =========================================================================
-    // GET /dashboard/recent?limit=10
+    // GET /dashboard/recent?page=0&size=10
     // ANALYST + ADMIN only
     //
-    // Returns the last N transactions ordered by transactionDate DESC.
-    // limit is capped at 50 in the service layer.
+    // Returns paginated transactions ordered by transactionDate DESC.
     // =========================================================================
     @GetMapping("/recent")
     @PreAuthorize("hasAnyRole('ANALYST', 'ADMIN')")
-    public ResponseEntity<ApiResponse<List<RecordResponse>>> getRecentTransactions(
-            @RequestParam(defaultValue = "10") int limit) {
+    public ResponseEntity<ApiResponse<PagedResponse<RecordResponse>>> getRecentTransactions(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
         return ResponseEntity.ok(
-                ApiResponse.success(dashboardService.getRecentTransactions(limit)));
+                ApiResponse.success(dashboardService.getRecentTransactions(page, size)));
+    }
+
+    // =========================================================================
+    // GET /dashboard/last5
+    // ALL roles (viewer, analyst, admin)
+    //
+    // Returns exactly 5 most recent records for the dashboard splash.
+    // =========================================================================
+    @GetMapping("/last5")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<ApiResponse<List<RecordResponse>>> getLast5() {
+        return ResponseEntity.ok(ApiResponse.success(dashboardService.getLast5()));
     }
 }
