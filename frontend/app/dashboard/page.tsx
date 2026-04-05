@@ -181,7 +181,7 @@ export default function DashboardPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
         <div className="animate-in slide-in-from-left duration-700">
           <h1 className="text-4xl font-black text-slate-800 dark:text-white tracking-tight italic">
-             CORE <span className="text-indigo-600 dark:text-indigo-400">FINANCE</span>
+            FIN <span className="text-indigo-600 dark:text-indigo-400">DASH</span>
           </h1>
           <p className="text-slate-500 dark:text-slate-300 mt-2 font-medium">Real-time overview of your financial health and movements.</p>
         </div>
@@ -190,121 +190,121 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
         {/* Left Column: Vertical Metrics */}
         <div className="lg:col-span-1 flex flex-col gap-6 h-full">
-           <MetricCard
-              label="Cumulative Income"
-              value={formatRupees(totalIncome)}
-              variant="green"
-              icon="💰"
-            />
-            <MetricCard
-              label="Global Expenses"
-              value={formatRupees(totalExpense)}
-              variant="red"
-              icon="📉"
-            />
-            <MetricCard
-              label="Current Net Balance"
-              value={formatRupees(netBalance)}
-              variant={netBalance >= 0 ? "green" : "red"}
-              icon={netBalance >= 0 ? "✅" : "⚠️"}
-            />
+          <MetricCard
+            label="Cumulative Income"
+            value={formatRupees(totalIncome)}
+            variant="green"
+            icon="💰"
+          />
+          <MetricCard
+            label="Global Expenses"
+            value={formatRupees(totalExpense)}
+            variant="red"
+            icon="📉"
+          />
+          <MetricCard
+            label="Current Net Balance"
+            value={formatRupees(netBalance)}
+            variant={netBalance >= 0 ? "green" : "red"}
+            icon={netBalance >= 0 ? "✅" : "⚠️"}
+          />
         </div>
 
         {/* Right Column: Recent Activity */}
         <div className="lg:col-span-2 bg-white dark:bg-[#22252e] rounded-[2.5rem] border border-slate-100 dark:border-[#2e3240] shadow-[0_20px_50px_rgba(0,0,0,0.03)] p-10 flex flex-col h-full transition-colors duration-300">
-           <div className="flex items-center justify-between mb-8">
-              <h2 className="text-xl font-bold text-slate-800 dark:text-white">Recent Movements</h2>
-              {role !== 'VIEWER' && (
-                <button 
-                  onClick={() => router.push('/dashboard/history')}
-                  className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
-                >VIEW ALL HISTORY →</button>
-              )}
-           </div>
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-xl font-bold text-slate-800 dark:text-white">Recent Movements</h2>
+            {role !== 'VIEWER' && (
+              <button
+                onClick={() => router.push('/dashboard/history')}
+                className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
+              >VIEW ALL HISTORY →</button>
+            )}
+          </div>
 
-           <div className="flex-1 space-y-6">
-              {recent.length === 0 ? (
-                <div className="h-full flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 py-10">
-                   <p className="text-sm font-medium italic">No recent transactions found.</p>
-                </div>
-              ) : (
-                recent.map((t: any) => (
-                  <div key={t.id} className="flex items-center justify-between group">
-                     <div className="flex items-center gap-3">
-                        <div className={`w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-xs ${t.type === 'INCOME' ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400' : 'bg-rose-50 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400'}`}>
-                           {t.type === 'INCOME' ? 'IN' : 'OUT'}
-                        </div>
-                        <div>
-                           <p className="text-sm font-bold text-slate-800 dark:text-white">{t.description}</p>
-                           <p className="text-[10px] font-bold text-slate-400 dark:text-slate-400 uppercase tracking-widest">{t.categoryName}</p>
-                        </div>
-                     </div>
-                     <div className="text-right">
-                        <p className={`text-base font-black ${t.type === 'INCOME' ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-800 dark:text-slate-200'}`}>
-                           {t.type === 'INCOME' ? '+' : ''}{formatRupees(t.amountPaise)}
-                        </p>
-                        <p className="text-[9px] font-bold text-slate-300 dark:text-slate-500 uppercase tracking-tighter transition-colors">{new Date(t.transactionDate).toLocaleDateString()}</p>
-                     </div>
+          <div className="flex-1 space-y-6">
+            {recent.length === 0 ? (
+              <div className="h-full flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 py-10">
+                <p className="text-sm font-medium italic">No recent transactions found.</p>
+              </div>
+            ) : (
+              recent.map((t: any) => (
+                <div key={t.id} className="flex items-center justify-between group">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-xs ${t.type === 'INCOME' ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400' : 'bg-rose-50 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400'}`}>
+                      {t.type === 'INCOME' ? 'IN' : 'OUT'}
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-slate-800 dark:text-white">{t.description}</p>
+                      <p className="text-[10px] font-bold text-slate-400 dark:text-slate-400 uppercase tracking-widest">{t.categoryName}</p>
+                    </div>
                   </div>
-                ))
-              )}
-           </div>
+                  <div className="text-right">
+                    <p className={`text-base font-black ${t.type === 'INCOME' ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-800 dark:text-slate-200'}`}>
+                      {t.type === 'INCOME' ? '+' : ''}{formatRupees(t.amountPaise)}
+                    </p>
+                    <p className="text-[9px] font-bold text-slate-300 dark:text-slate-500 uppercase tracking-tighter transition-colors">{new Date(t.transactionDate).toLocaleDateString()}</p>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
         </div>
       </div>
 
       {/* Chart Section */}
       {summaries.length > 0 && (
-          <div className="p-8 bg-white dark:bg-[#22252e] rounded-[2.5rem] border border-slate-100 dark:border-[#2e3240] shadow-[0_20px_50px_rgba(0,0,0,0.02)]">
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-lg font-black text-slate-800 dark:text-white uppercase tracking-wider">Performance Trends</h3>
-              <div className="px-4 py-1.5 bg-slate-50 dark:bg-[#1a1c24] border border-slate-100 dark:border-[#2e3240] rounded-full text-[10px] font-bold text-slate-400 dark:text-slate-300 uppercase tracking-widest">
-                Analytics Engine
-              </div>
+        <div className="p-8 bg-white dark:bg-[#22252e] rounded-[2.5rem] border border-slate-100 dark:border-[#2e3240] shadow-[0_20px_50px_rgba(0,0,0,0.02)]">
+          <div className="flex items-center justify-between mb-8">
+            <h3 className="text-lg font-black text-slate-800 dark:text-white uppercase tracking-wider">Performance Trends</h3>
+            <div className="px-4 py-1.5 bg-slate-50 dark:bg-[#1a1c24] border border-slate-100 dark:border-[#2e3240] rounded-full text-[10px] font-bold text-slate-400 dark:text-slate-300 uppercase tracking-widest">
+              Analytics Engine
             </div>
-            <div className="h-[400px] w-full">
-               <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={chartData} margin={{ top: 0, right: 30, left: 20, bottom: 40 }}>
-                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={theme === 'dark' ? "#2e3240" : "#f1f5f9"} />
-                     <XAxis 
-                        dataKey="name" 
-                        axisLine={false} 
-                        tickLine={false} 
-                        tick={{ fill: theme === 'dark' ? "#94a3b8" : "#64748b", fontSize: 10, fontWeight: 600 }}
-                        interval={0}
-                        dy={10}
-                     />
-                     <YAxis 
-                        axisLine={false} 
-                        tickLine={false} 
-                        tick={{ fill: theme === 'dark' ? "#94a3b8" : "#64748b", fontSize: 10 }}
-                        tickFormatter={(val) => `₹${val/1000}k`}
-                     />
-                     <Tooltip content={<CustomTooltip />} cursor={{ fill: theme === 'dark' ? 'rgba(255,255,255,0.05)' : '#f8fafc' }} />
-                     <Bar 
-                        name="Income" 
-                        dataKey="Income" 
-                        fill="#10b981" 
-                        radius={[6, 6, 0, 0]} 
-                        barSize={32}
-                     />
-                     <Bar 
-                        name="Expenses" 
-                        dataKey="Expenses" 
-                        fill="#ef4444" 
-                        radius={[6, 6, 0, 0]} 
-                        barSize={32}
-                     />
-                     <Bar 
-                        name="Net Balance" 
-                        dataKey="Net Balance" 
-                        fill="#6366f1" 
-                        radius={[6, 6, 0, 0]} 
-                        barSize={32}
-                     />
-                  </BarChart>
-               </ResponsiveContainer>
-            </div>
-         </div>
+          </div>
+          <div className="h-[400px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={chartData} margin={{ top: 0, right: 30, left: 20, bottom: 40 }}>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={theme === 'dark' ? "#2e3240" : "#f1f5f9"} />
+                <XAxis
+                  dataKey="name"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fill: theme === 'dark' ? "#94a3b8" : "#64748b", fontSize: 10, fontWeight: 600 }}
+                  interval={0}
+                  dy={10}
+                />
+                <YAxis
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fill: theme === 'dark' ? "#94a3b8" : "#64748b", fontSize: 10 }}
+                  tickFormatter={(val) => `₹${val / 1000}k`}
+                />
+                <Tooltip content={<CustomTooltip />} cursor={{ fill: theme === 'dark' ? 'rgba(255,255,255,0.05)' : '#f8fafc' }} />
+                <Bar
+                  name="Income"
+                  dataKey="Income"
+                  fill="#10b981"
+                  radius={[6, 6, 0, 0]}
+                  barSize={32}
+                />
+                <Bar
+                  name="Expenses"
+                  dataKey="Expenses"
+                  fill="#ef4444"
+                  radius={[6, 6, 0, 0]}
+                  barSize={32}
+                />
+                <Bar
+                  name="Net Balance"
+                  dataKey="Net Balance"
+                  fill="#6366f1"
+                  radius={[6, 6, 0, 0]}
+                  barSize={32}
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
       )}
     </div>
   );
