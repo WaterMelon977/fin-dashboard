@@ -12,7 +12,7 @@ import {
   CartesianGrid,
 } from "recharts";
 
-const API = "http://localhost:8080";
+import { API_URL as API } from "@/lib/config";
 
 type CategoryType = "INCOME" | "EXPENSE" | "BOTH";
 

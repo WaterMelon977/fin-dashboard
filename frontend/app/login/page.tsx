@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { isLoggedIn, setSession, getToken, authHeaders, type User } from "@/lib/auth";
 
-const API = "http://localhost:8080";
+import { API_URL as API } from "@/lib/config";
 
 export default function LoginPage() {
   const router = useRouter();
